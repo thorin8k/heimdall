@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-export default class I18nLoader {
+//TODO convert to async/await
+export class I18nLoader {
     /**
      *
      * @param lang

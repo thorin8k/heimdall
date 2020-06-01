@@ -8,17 +8,17 @@ import cors from 'cors';
 const NedbStore = require('nedb-session-store')(session);
 import fileUpload from 'express-fileupload';
 import url from 'url';
-import JsonResponse from './common/JsonResponse.js';
+import { JsonResponse } from './common';
 
 
-import * as loadRoutes from './api'
+import { loadRoutes } from './api'
 
 /**
  * Clase servidor encargada de configurar las rutas.
  *
  * que el codigo se disperse entre diferentes proyectos.
  */
-export default class Server {
+export class Server {
 
     constructor() {
 
@@ -72,7 +72,7 @@ export default class Server {
                 let pathname = url.parse(request.url).pathname;
                 let end = Date.now() - request.requestTime;
                 if (this.withLog) {
-                    console.log(moment(Date.now(), 'DD-MM-YYYY HH:mm:ss.SSS') + ' - Request[' + process.pid + ']::. ' + pathname + ' |-> took time: '+end+' ms');
+                    console.log(moment(Date.now(), 'DD-MM-YYYY HH:mm:ss.SSS') + ' - Request[' + process.pid + ']::. ' + pathname + ' |-> took time: ' + end + ' ms');
                 }
             });
             next();

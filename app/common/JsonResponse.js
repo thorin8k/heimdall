@@ -1,4 +1,4 @@
-export default class JsonResponse {
+export class JsonResponse {
     constructor(status, data, message, total) {
         this.data = data;
         this.status = status;

@@ -30,7 +30,7 @@
   "scripts": {
     "start": "node execute.js",
     "view": "cd ./frontend/ && npm start",
-    "test": "mocha --recursive .\\test\\*.test.js --require esm"
+    "test": "mocha"
   },
   "devDependencies": {
     "chai": "^4.2.0",

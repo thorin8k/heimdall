@@ -1,8 +1,8 @@
 
-import BaseDao from '../model/BaseDao';
+import { BaseDao } from './';
 
 
-export default class BaseService {
+export class BaseService {
 
     constructor(tableName) {
         this.mainDao = new BaseDao(tableName);

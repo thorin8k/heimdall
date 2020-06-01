@@ -1,7 +1,7 @@
-import BaseService from './BaseService.js';
-import Utils from '../common/Utils';
+import { BaseService } from '../base';
+import { Utils } from '../../common';
 
-export default class UserService extends BaseService {
+export class UserService extends BaseService {
     /**
      * Constructor para la inicializacion del mainDao
      */

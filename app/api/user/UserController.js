@@ -1,11 +1,10 @@
 import express from 'express';
-import JsonResponse from '../../common/JsonResponse.js';
-import UserService from "../../service/UserService.js";
+import { JsonResponse } from '../../common';
+import { UserService } from "./";
 
 const asyncHandler = require('express-async-handler')
-// var ProfileService = require("../service/ProfileService.js");
 
-class UserController {
+export class UserController {
 
     constructor() {
         this.router = express.Router();
@@ -71,5 +70,3 @@ class UserController {
     }
 
 }
-
-export { UserController as UserController };

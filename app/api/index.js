@@ -1,6 +1,7 @@
-import { LoginController as LoginController } from './auth/LoginController'
-import { DynamicController as DynamicController } from './base/DynamicController'
-import { UserController as UserController } from './user'
+
+import { MainController } from './main'
+import { DynamicController } from './base'
+import { LoginController, UserController } from './user'
 
 
 /**
@@ -8,33 +9,27 @@ import { UserController as UserController } from './user'
  */
 const routes = [
     LoginController,
+    MainController,
     DynamicController,
     UserController
 ]
 
 
 /**
- * Instancia una ruta
- * @param handler
- * @param params
+ * Instancia la lista de rutas disponibles
+ * @param apps
  * @returns {*}
  */
-createController = (Handler, params, idx) => {
-    try {
-        let obj = new Handler(params);
-        return obj;
-    } catch (ex) {
-        console.log(idx);
-        console.log(ex);
-    }
-}
-
-
-export default (app) => {
+const loadRoutes = (app) => {
 
     for (let idx in routes) {
-        const elm = routes[idx];
-        const route = createController(elm[idx], [], idx);
+        const controller = routes[idx];
+        let route;
+        try {
+            route = new controller();
+        } catch (ex) {
+            console.error(`Error creating ${controller.name}: ${ex}`);
+        }
         if (!route) continue;
 
         const router = route.configure();
@@ -43,4 +38,5 @@ export default (app) => {
         }
     }
 
-}
+};
+export { loadRoutes };

@@ -5,7 +5,7 @@ const nconf = require('nconf');
 const cfgFileName = 'configuration.json';
 const baseCfgFileName = 'baseconfig.json';
 
-export default class Settings {
+export class Settings {
     static load() {
         let baseRaw = fs.readFileSync(path.resolve(process.cwd(), baseCfgFileName), 'utf8');
         let baseSettings = JSON.parse(baseRaw);

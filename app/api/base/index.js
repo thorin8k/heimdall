@@ -1,7 +1,7 @@
-import { BaseDao as BaseDao } from './BaseDao'
-import { DynamicController as DynamicController } from './DynamicController'
-import { BaseService as BaseService } from './BaseService'
+import { BaseDao } from './BaseDao'
+import { DynamicController } from './DynamicController'
+import { BaseService } from './BaseService'
 
-export { BaseDao as BaseDao }
-export { DynamicController as DynamicController }
-export { BaseService as BaseService }
+export { BaseDao }
+export { DynamicController }
+export { BaseService }

@@ -1,0 +1,5 @@
+{
+    "require": [ "esm" ],
+    "reporter": "nyan",
+    "file": [ "./test/run-enviroment.js" ]
+}

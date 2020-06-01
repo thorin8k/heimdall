@@ -1,19 +1,19 @@
 import path from 'path';
 import express from 'express';
-import JsonResponse from '../common/JsonResponse.js';
-import I18nLoader from '../common/I18nLoader.js';
+import { JsonResponse, I18nLoader } from '../../common';
 
 import fs from 'fs';
 import lodash from 'lodash';
 
 const asyncHandler = require('express-async-handler')
 
-class IndexController {
+export class MainController {
     constructor() {
         this.router = express.Router();
     }
 
     configure() {
+        //TODO Asyncify
         this.router.get('/', (this.index.bind(this.index)));
         this.router.get('/logs', (this.logs.bind(this.logs)));
         this.router.get('/translation', (this.translation.bind(this.translation)));
@@ -71,4 +71,3 @@ class IndexController {
         });
     }
 }
-export { IndexController as IndexController };

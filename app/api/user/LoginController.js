@@ -1,6 +1,6 @@
 import express from 'express';
-import JsonResponse from '../../common/JsonResponse.js';
-import UserService from '../../service/UserService';
+import { JsonResponse } from '../../common';
+import { UserService } from './';
 
 const asyncHandler = require('express-async-handler')
 
@@ -110,4 +110,4 @@ class LoginController {
     }
 }
 
-export { LoginController as LoginController }
+export { LoginController };

@@ -2,7 +2,7 @@ import http from 'http';
 /**
  * Inicializa la escucha del server en modo cluster
  */
-export default class ClusterServer {
+export class ClusterServer {
     constructor(cls, port, clustered) {
 
         this.port = this.normalizePort(port || 3000);
@@ -66,18 +66,18 @@ export default class ClusterServer {
     initUnclustered(cls) {
         //Initialize clustered servers
 
-        let srv = new cls();
-        srv.withLog = this.withLog;
+        this.server = new cls();
+        this.server.withLog = this.withLog;
 
-        srv.port = this.port;
+        this.server.port = this.port;
         //create http server
-        let server = http.createServer(srv.app);
+        let server = http.createServer(this.server.app);
 
         //listen on provided ports
-        server.listen(srv.port);
+        server.listen(this.server.port);
         //add error handler
         server.on("error", (err) => {
-            this.handleErrors(err, srv.port);
+            this.handleErrors(err, this.server.port);
         });
         //start listening on port
         server.on("listening", () => {

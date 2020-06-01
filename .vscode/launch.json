@@ -6,20 +6,24 @@
             "request": "launch",
             "name": "Mocha Tests",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "cwd": "${workspaceRoot}",
             "args": [
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/test",
+                "--recursive",
+                "${workspaceFolder}/test/*.test.js",
+                "--file",
+                "${workspaceRoot}/test/run-enviroment.js",
                 "--require",
-                "esm"
+                "esm",
+                "--exit"
             ],
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": [
                 "<node_internals>/**"
             ]
         },
-        
         {
             "name": "Iniciar",
             "type": "node",

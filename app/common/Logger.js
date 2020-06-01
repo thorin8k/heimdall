@@ -16,8 +16,8 @@ const printf = format.printf;
 const timestamp = format.timestamp;
 
 
-
-export default class Logger {
+// TODO improve with winston console appender
+export class Logger {
 
     constructor() {
         const self = this;

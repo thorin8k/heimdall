@@ -1,5 +1,7 @@
-import {UserController as UserController} from './UserController'
-import {UserService as UserService} from './UserService'
+import { UserController } from './UserController'
+import { UserService } from './UserService'
+import { LoginController } from './LoginController'
 
-export {UserController as UserController}
-export {UserService as UserService}
+export { LoginController }
+export { UserController };
+export { UserService };

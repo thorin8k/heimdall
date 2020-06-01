@@ -1,6 +1,6 @@
 
 
-export default class Utils {
+export class Utils {
     static arrayToLower(mcArray) {
         let tmp = mcArray.join('~').toLowerCase();
         return tmp.split('~');

@@ -1,5 +1,5 @@
 import express from 'express';
-import JsonResponse from '../../common/JsonResponse.js';
+import { JsonResponse } from '../../common';
 
 const asyncHandler = require('express-async-handler')
 
@@ -10,25 +10,20 @@ const asyncHandler = require('express-async-handler')
 const entityMappings = {
     profile: {
         cls: 'BaseService',
+        pkg: 'base',
         table: 'profile'
     },
     user: {
         cls: 'UserService',
+        pkg: 'user',
         table: 'user'
-    },
-    patient: {
-        cls: 'BaseService',
-        table: 'patient'
-    },
-    document: {
-        cls: 'BaseService',
-        table: 'document'
     }
+
 }
 
 
 
-class zDynamicController {
+class DynamicController {
 
 
     constructor() {
@@ -52,8 +47,8 @@ class zDynamicController {
     entityFactory(type, next) {
         const element = entityMappings[type];
         if (element) {
-            let cls = require('../service/' + element.cls);
-            let object =  new cls.default(element.table);
+            let cls = require('../' + pkg);
+            let object = new cls[element.cls](element.table);
             return object;
         }
 
@@ -61,9 +56,9 @@ class zDynamicController {
     }
 
     /**
-     * Lista los entidades en la aplicacion, es posible enviarle parametros de filtrado.
+     * Lista entidades en la aplicacion, es posible enviarle parametros de filtrado.
      *
-     * Todavia no se ha definido la lista de parametros a utilizar para el filtrado.
+     * !FIXME Todavia no se ha definido la lista de parametros a utilizar para el filtrado.
      *
      * @api {get} /:entidad/list List entidades
      * @apiName Listar entidades
@@ -87,11 +82,11 @@ class zDynamicController {
         response.json(jsRes.toJson());
     }
     /**
-     *Obtiene un usuario concreto mediante su identificador
+     *Obtiene un elemento concreto mediante su identificador
      *
      *
      * @api {get} /:entidad/:id Request entidad information
-     * @apiName Obtener usuario
+     * @apiName Obtener entidad
      * @apiGroup entidad
      *
      * @apiParam {Number} id entidades unique ID.
@@ -111,11 +106,11 @@ class zDynamicController {
     }
 
     /**
-     * Almacena un usuario,
+     * Almacena un elemento en BD
      *
      *
      * @api {post} /:entidad/:id Create or update entidad
-     * @apiName Almacenar usuario
+     * @apiName Almacenar entidad
      * @apiGroup entidad
      *
      * @apiParam {Number} id entidades unique ID.
@@ -136,11 +131,11 @@ class zDynamicController {
     }
 
     /**
-     * Elimina el usuario correspondiente al identificador recibido
+     * Elimina un elemento correspondiente al identificador recibido
      *
      *
      * @api {post} /:entidad/:id/delete Delete entidad
-     * @apiName Almacenar usuario
+     * @apiName Almacenar entidad
      * @apiGroup entidad
      *
      * @apiParam {Number} id entidades unique ID.
@@ -162,4 +157,4 @@ class zDynamicController {
 
 }
 
-export { zDynamicController as zDynamicController };
+export { DynamicController };

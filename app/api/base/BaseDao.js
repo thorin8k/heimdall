@@ -4,7 +4,7 @@
  * 
  * TODO test
  */
-export default class BaseDao {
+export class BaseDao {
 
     constructor(tableName) {
         this.tableName = tableName;
