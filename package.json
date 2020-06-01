@@ -1,0 +1,46 @@
+{
+  "name": "heimdall",
+  "version": "1.0.0",
+  "description": "Simple CI/CD based on Webhooks and gulp",
+  "license": "GPL",
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-fileupload": "^1.1.6",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "helmet": "^3.22.0",
+    "iconv-lite": "^0.5.1",
+    "moment": "^2.26.0",
+    "mongodb": "^3.5.8",
+    "nconf": "^0.10.0",
+    "nedb-session-store": "^1.1.2",
+    "path": "^0.12.7",
+    "require-dir": "^1.2.0",
+    "winston": "^3.2.1"
+  },
+  "scripts": {
+    "start": "node execute.js",
+    "view": "cd ./frontend/ && npm start",
+    "test": "mocha --recursive .\\test\\*.test.js --require esm"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "del": "^5.1.0",
+    "eslint": "^6.6.0",
+    "gulp": "^4.0.2",
+    "gulp-if": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.0.1",
+    "mocha": "^7.2.0"
+  }
+}

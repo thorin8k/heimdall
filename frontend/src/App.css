@@ -1,0 +1,16 @@
+@import '~antd/dist/antd.css';
+
+body {
+  background: #f0f2f5;
+}
+
+.App .ant-card {
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .ant-layout-header{
+    padding: 0;
+  }
+}

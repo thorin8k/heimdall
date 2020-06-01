@@ -1,0 +1,25 @@
+{
+    "lang": "es",
+    "debug": true,
+    "server": {
+      "clustered": false,
+      "port": 3006,
+      "httpsPort": 3663,
+      "https": false,
+      "sessionDir": "temp/sessions"
+    },
+    "tempDir": "/temp",
+    "mongoDbUrl": "mongodb://localhost/heimdall",
+
+    "publicPathsList": [
+      "/",
+      "/logs",
+      "/login",
+      "/log/info",
+      "/log/debug",
+      "/log/error",
+      "/translation",
+      "/config",
+      "/external"
+    ]
+  }

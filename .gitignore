@@ -1,0 +1,6 @@
+.idea/
+logs/
+temp/
+node_modules/
+out/
+frontend/build/

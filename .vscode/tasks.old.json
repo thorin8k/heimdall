@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "ant",
+    "isShellCommand": true,
+    "options": {
+         "cwd": "${workspaceRoot}"
+    },
+    "showOutput": "always",
+    "tasks":[
+        {
+            "taskName": "compile",
+            "args": ["compile"],
+            "isBuildCommand": true,
+            "isWatching": false
+        },
+        {
+            "taskName": "clean",
+            "args": ["clean"],
+            "isBuildCommand": false,
+            "isWatching": false
+        },
+        {
+            "taskName": "distribute",
+            "args": ["distribute"],
+            "isBuildCommand": false,
+            "isWatching": false
+        }
+    ]
+}
