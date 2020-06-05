@@ -4,3 +4,5 @@ temp/
 node_modules/
 out/
 frontend/build/
+coverage/
+.nyc_output/
