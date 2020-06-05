@@ -4,55 +4,25 @@ import { JsonResponse } from '../../common';
 const asyncHandler = require('express-async-handler')
 
 
-/**
- * Definicion de tablas a utilizar y sus servicios. BaseService por defecto.
- */
-const entityMappings = {
-    profile: {
-        cls: 'BaseService',
-        pkg: 'base',
-        table: 'profile'
-    },
-    user: {
-        cls: 'UserService',
-        pkg: 'user',
-        table: 'user'
-    }
-
-}
-
-
-
-class DynamicController {
+export class BaseController {
 
 
     constructor() {
         this.router = express.Router();
     }
 
-    configure() {
-        this.router.get('/:entity/list', asyncHandler((res, req, next) => { this.listEntidad(res, req, next); }));
-        this.router.get('/:entity/:id', asyncHandler((res, req, next) => { this.getEntidad(res, req, next); }));
-        this.router.post('/:entity', asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
-        this.router.post('/:entity/:id', asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
-        this.router.post('/:entity/:id/delete', asyncHandler((res, req, next) => { this.deleteEntidad(res, req, next); }));
+    configure(entity, config) {
+        this.router.get(`/${entity}/list`, asyncHandler((res, req, next) => { this.listEntidad(res, req, next); }));
+        this.router.get(`/${entity}/:id`, asyncHandler((res, req, next) => { this.getEntidad(res, req, next); }));
+        this.router.post(`/${entity}`, asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
+        this.router.post(`/${entity}/:id`, asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
+        this.router.delete(`/${entity}/:id`, asyncHandler((res, req, next) => { this.deleteEntidad(res, req, next); }));
+
+        this.service = config.service;
+        this.model = config.model;
+        this.table = config.table;
 
         return this.router;
-    }
-
-    /**
-     * 
-     * @param {*} type 
-     */
-    entityFactory(type, next) {
-        const element = entityMappings[type];
-        if (element) {
-            let cls = require('../' + pkg);
-            let object = new cls[element.cls](element.table);
-            return object;
-        }
-
-        next('Wrong path. Entity not recognized');
     }
 
     /**
@@ -70,13 +40,10 @@ class DynamicController {
      * @apiSuccess {Object[]} data  dataObject
      */
     async listEntidad(request, response, next) {
-        if (!request.params.entity) {
-            next('Wrong path. Required param entity.');
-        }
-        let service = this.entityFactory(request.params.entity, next);
+        let service = new this.service();
         let filters = request.query;
 
-        let data = await service.list(filters, request, response);
+        let data = await service.list(filters, request.query.start, request.query.limit);
         let jsRes = new JsonResponse(true, data);
 
         response.json(jsRes.toJson());
@@ -95,10 +62,7 @@ class DynamicController {
      * @apiSuccess {Object[]} data  dataObject
      */
     async getEntidad(request, response, next) {
-        if (!request.params.entity) {
-            next('Wrong path.Required param entity.');
-        }
-        let service = this.entityFactory(request.params.entity, next);
+        let service = new this.service();
         let data = await service.getById(request.params.id);
         let jsRes = new JsonResponse(true, data);
 
@@ -119,15 +83,13 @@ class DynamicController {
      * @apiSuccess {Object[]} data  dataObject
      */
     async saveEntidad(request, response, next) {
-        if (!request.params.entity) {
-            next('Wrong path.Required param entity.');
-        }
-        let service = this.entityFactory(request.params.entity, next);
-        let data = await service.save(request.params.id, request.body);
+        let service = new this.service();
+        let object = this.model.fromObject(request.body);
+
+        let data = await service.save(request.params.id, object);
         let jsRes = new JsonResponse(true, { id: request.body.id || data[0] });
 
         response.json(jsRes.toJson());
-
     }
 
     /**
@@ -144,17 +106,12 @@ class DynamicController {
      * @apiSuccess {Object[]} data  dataObject
      */
     async deleteEntidad(request, response, next) {
-        if (!request.params.entity) {
-            next('Wrong path.Required param entity.');
-        }
-        let service = this.entityFactory(request.params.entity, next);
+        let service = new this.service();
         let data = await service.remove(request.params.id);
         let jsRes = new JsonResponse(true, data);
 
         response.json(jsRes.toJson());
-
     }
 
 }
 
-export { DynamicController };

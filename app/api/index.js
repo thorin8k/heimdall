@@ -1,7 +1,11 @@
 
 import { MainController } from './main'
-import { DynamicController } from './base'
 import { LoginController, UserController } from './user'
+import { ProjectController } from './project';
+import { JobController } from './job';
+import { CommandController } from './command';
+import { ExecutionController } from './execution';
+import { RepositoryController } from './repository/RepositoryController';
 
 
 /**
@@ -10,8 +14,12 @@ import { LoginController, UserController } from './user'
 const routes = [
     LoginController,
     MainController,
-    DynamicController,
-    UserController
+    UserController,
+    ProjectController,
+    JobController,
+    CommandController,
+    ExecutionController,
+    RepositoryController
 ]
 
 

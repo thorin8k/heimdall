@@ -4,19 +4,20 @@ import { BaseDao } from './';
 
 export class BaseService {
 
-    constructor(tableName) {
-        this.mainDao = new BaseDao(tableName);
+    constructor(tableName, model) {
+        this.mainDao = new BaseDao(tableName, model);
+        this.model = model;
     }
     /**
      * Obtencion de una lista de elementos.
      *
-     * filters, es opcionale. Si no se pasan se devuelve lo que hay (undefined);
+     * filters, es opcional. Si no se pasan se devuelve lo que hay ;
      */
-    list(filters, request, response) {
+    list(filters, start, limit) {
         if (filters && Object.keys(filters).length !== 0) {
             //Pagination
-            var start = request && request.query.start ? request.query.start : 0;
-            var limit = request && request.query.limit ? request.query.limit : 1000;//Default limit
+            var start = start || 0;
+            var limit = limit || 1000;//Default limit
             return this.mainDao.loadFilteredData(filters, start, limit);
         }
         return this.mainDao.loadAllData();

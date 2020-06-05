@@ -13,39 +13,31 @@ export class MainController {
     }
 
     configure() {
-        //TODO Asyncify
-        this.router.get('/', (this.index.bind(this.index)));
-        this.router.get('/logs', (this.logs.bind(this.logs)));
-        this.router.get('/translation', (this.translation.bind(this.translation)));
-        this.router.get('/config', (this.config.bind(this.config)));
-        this.router.get('/log/:log', (this.log.bind(this.log)));
+        // this.router.get('/', asyncHandler((res, req, next) => { this.index(res, req, next); }));
+        // this.router.get('/logs', asyncHandler((res, req, next) => { this.logs(res, req, next); }));
+        this.router.get('/translation', asyncHandler((res, req, next) => { this.translation(res, req, next); }));
+        this.router.get('/config', asyncHandler((res, req, next) => { this.config(res, req, next); }));
+        this.router.get('/log/:log', asyncHandler((res, req, next) => { this.log(res, req, next); }));
 
 
         return this.router;
     }
 
-    getRoutes() {
-        return this.router;
-    }
 
-    index(request, response) {
-        var filePath = path.resolve("app/statics/index.html");
-        response.sendFile(filePath);
-    }
-    logs(request, response) {
-        var filePath = path.resolve("app/statics/logs/log.html");
-        response.sendFile(filePath);
-    }
+    // index(request, response) {
+    //     var filePath = path.resolve("app/statics/index.html");
+    //     response.sendFile(filePath);
+    // }
+    // logs(request, response) {
+    //     var filePath = path.resolve("app/statics/logs/log.html");
+    //     response.sendFile(filePath);
+    // }
 
-    translation(request, response) {
-        //TODO NO ASYNC YET
-        I18nLoader.load(function (err, data) {
-            if (err) throw err;
-            let jsRes = new JsonResponse();
-            jsRes.success = true;
-            jsRes.data = data;
-            response.json(jsRes.toJson());
-        });
+    async translation(request, response) {
+        const data = await I18nLoader.load();
+        let jsRes = new JsonResponse(true, data);
+
+        response.json(jsRes.toJson());
     }
 
     config(request, response) {
@@ -53,21 +45,23 @@ export class MainController {
     }
 
 
-    log(request, response) {
-        //TODO async!
-        var log = [];
-        fs.readFile('logs/' + request.params.log + '.log', 'utf8', (err, data) => {
-            let logData = "";
+    log(request, response, next) {
+        return new Promise((resolve, reject) => {
+            var log = [];
+            fs.readFile('logs/' + request.params.log + '.log', 'utf8', (err, data) => {
+                let logData = "";
 
-            if (err) {
-                logData = ""
-            } else {
+                if (err) {
+                    return next('Log not found');
+                }
+
                 log = data.split('\n');
                 log = lodash.takeRight(log, 200);
                 logData = log.join('\n');
-            }
+                response.send(logData);
+                resolve();
+            });
+        })
 
-            response.send(logData);
-        });
     }
 }

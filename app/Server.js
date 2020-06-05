@@ -8,6 +8,7 @@ import cors from 'cors';
 const NedbStore = require('nedb-session-store')(session);
 import fileUpload from 'express-fileupload';
 import url from 'url';
+import moment from 'moment';
 import { JsonResponse } from './common';
 
 
@@ -72,7 +73,7 @@ export class Server {
                 let pathname = url.parse(request.url).pathname;
                 let end = Date.now() - request.requestTime;
                 if (this.withLog) {
-                    console.log(moment(Date.now(), 'DD-MM-YYYY HH:mm:ss.SSS') + ' - Request[' + process.pid + ']::. ' + pathname + ' |-> took time: ' + end + ' ms');
+                    console.log(moment(new Date()).format('DD-MM-YYYY HH:mm:ss.SSS') + ' - Request[' + process.pid + ']::. ' + pathname + ' |-> took: ' + end + ' ms');
                 }
             });
             next();
@@ -98,8 +99,8 @@ export class Server {
             let jsRes = new JsonResponse();
             jsRes.success = false;
             jsRes.message = err;
-            console.log(err);
-            res.json(jsRes.toJson());
+            // console.log(err);
+            res.status(500).json(jsRes.toJson());
         });
     }
 }

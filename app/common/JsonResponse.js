@@ -1,10 +1,9 @@
 export class JsonResponse {
-    constructor(status, data, message, total) {
+    constructor(success, data, message, total) {
         this.data = data;
-        this.status = status;
+        this.success = success;
         this.total = total;
         this.message = message || '';
-        this.success = true;
     }
 
     toJson() {

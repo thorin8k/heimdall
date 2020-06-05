@@ -1,20 +1,22 @@
 import express from 'express';
 import { JsonResponse } from '../../common';
-import { UserService } from "./";
+
+import { BaseController } from '../base'
+import { UserService, User } from "./";
 
 const asyncHandler = require('express-async-handler')
 
-export class UserController {
+export class UserController extends BaseController {
 
     constructor() {
-        this.router = express.Router();
+        super();
     }
 
     configure() {
 
-        this.router.get('/session', asyncHandler(this.getSession.bind(this.getSession)));
+        super.configure('user', { service: UserService, model: User, table: 'user' });
 
-        this.router.get('/profile/list', asyncHandler(this.profiles.bind(this.profiles)));
+        this.router.get('/session', asyncHandler((res, req, next) => { this.getSession(res, req, next); }));
 
         return this.router;
     }
@@ -38,7 +40,7 @@ export class UserController {
     async getSession(request, response) {
         if (request.session.username) {
             var service = new UserService();
-            let data = await service.list({ user: request.session.username }, request, response);
+            let data = await service.list({ user: request.session.username }, request.query.start, request.query.limit);
 
             delete data[0].pass;
             let jsRes = new JsonResponse(true, data[0], "", 1);
@@ -46,27 +48,5 @@ export class UserController {
         }
     }
 
-    /**
-     *Obtiene la lista de perfiles disponibles
-     *
-     *
-     * @api {get} /profile/list Request Session information
-     * @apiName Obtener usuario
-     * @apiGroup User
-     *
-     *
-     * @apiSuccess {Boolean} success
-     * @apiSuccess {Object[]} data  dataObject
-     * @apiSuccess {String} data.username  Nombre de usuario
-     * @apiSuccess {String} data.email  Correo electronico
-     * @apiSuccess {String} data.active  Estado del usuario
-     */
-    async profiles(request, response) {
-        const service = new UserService();
-
-        let data = await service.listProfiles();
-        let jsRes = new JsonResponse(true, data);
-        response.json(jsRes.toJson());
-    }
-
+    
 }

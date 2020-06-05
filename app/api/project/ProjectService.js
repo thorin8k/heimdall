@@ -1,0 +1,15 @@
+import { BaseService } from '../base';
+import { Project } from './';
+
+export class ProjectService extends BaseService {
+    /**
+     * Constructor para la inicializacion del mainDao
+     */
+    constructor() {
+        super('project', Project);
+    }
+
+
+
+}
+

@@ -8,19 +8,20 @@ export class I18nLoader {
      * @param lang
      * @param callback
      */
-    static load(callback) {
-        /*var lang = global.settings.lang.value;*/
-        var lang = global.settings.getConfigValue("lang");
+    static load() {
+        return new Promise((resolve, reject) => {
+            var lang = global.settings.getConfigValue("lang");
 
-        fs.readFile(path.dirname(require.main.filename) + '/i18n/lang_' + lang + ".json", 'utf8', (err, data) => {
-            if (err) return callback(err, null);
-            var parsedData = JSON.parse(data);
+            fs.readFile(__dirname + '../../../i18n/lang_' + lang + ".json", 'utf8', (err, data) => {
+                if (err) return reject(err);
+                var parsedData = JSON.parse(data);
 
-            this.currentData = parsedData;
-            global._ = this.translate;
+                this.currentData = parsedData;
+                global._ = this.translate;
 
-            callback(null, parsedData);
-        });
+                resolve(parsedData);
+            });
+        })
     }
 
     /**

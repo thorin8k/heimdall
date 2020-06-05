@@ -1,4 +1,4 @@
-import { Logger, Settings, Utils } from './app/common';
+import { Logger, Settings, Utils, I18nLoader } from './app/common';
 import { Server, ClusterServer } from './app/';
 import mongodb from 'mongodb';
 
@@ -9,6 +9,8 @@ module.exports = (withLog) => {
     //Carga de configuraciones
     global.settings = Settings.load();
 
+    I18nLoader.load();
+    
     new Logger();
 
     const url = global.settings.getConfigValue('mongoDbUrl');

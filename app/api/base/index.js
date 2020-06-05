@@ -1,7 +1,9 @@
+import { BaseModel } from './BaseModel'
 import { BaseDao } from './BaseDao'
-import { DynamicController } from './DynamicController'
+import { BaseController } from './BaseController'
 import { BaseService } from './BaseService'
 
+export { BaseModel }
 export { BaseDao }
-export { DynamicController }
+export { BaseController }
 export { BaseService }

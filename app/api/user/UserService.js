@@ -1,4 +1,5 @@
 import { BaseService } from '../base';
+import { User } from './';
 import { Utils } from '../../common';
 
 export class UserService extends BaseService {
@@ -6,7 +7,7 @@ export class UserService extends BaseService {
      * Constructor para la inicializacion del mainDao
      */
     constructor() {
-        super('user');
+        super('user', User);
     }
 
     /**
