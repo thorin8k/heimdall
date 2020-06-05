@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for heimdall/app/api/job/Job.js</title>
+    <title>Code coverage report for heimdall/app/api/execution/Execution.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">heimdall/app/api/job</a> Job.js</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">heimdall/app/api/execution</a> Execution.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">61.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">16.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">61.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
@@ -83,57 +83,60 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { BaseModel } from '../base';
 &nbsp;
 /**
- * Los jobs se asocian a los proyectos y son una lista de comandos a ejecutar
- * 
+ * Las ejecuciones registran los resultados de correr un Job.
  */
-export class Job extends BaseModel {
+export class Execution extends BaseModel {
 &nbsp;
-    constructor(id, project, name, commands, configs) {
+<span class="fstat-no" title="function not covered" >    st</span>atic get STATUS_FAIL() { <span class="cstat-no" title="statement not covered" >return 'failed' </span>};
+<span class="fstat-no" title="function not covered" >    st</span>atic get STATUS_STOPPED() { <span class="cstat-no" title="statement not covered" >return 'stopped' </span>};
+<span class="fstat-no" title="function not covered" >    st</span>atic get STATUS_RUNNING() { <span class="cstat-no" title="statement not covered" >return 'running' </span>};
+<span class="fstat-no" title="function not covered" >    st</span>atic get STATUS_SUCCEEDED() { <span class="cstat-no" title="statement not covered" >return 'succedeed' </span>};
+<span class="fstat-no" title="function not covered" >    st</span>atic get STATUS_QUEUED() { <span class="cstat-no" title="statement not covered" >return 'queued' </span>};
+&nbsp;
+    constructor(id, job, date, tags, artifacts, logs, user, status) {
         super(id);
 &nbsp;
-        this.project = project;
-        this.name = name;
-        this.commands = commands;
-        this.configs = configs;
+        this.job = job;
+        this.date = date;
+        this.tags = tags;
+        this.artifacts = artifacts;
+        this.logs = logs;
+        this.user = user;
+        this.status = status;
     }
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    ad</span>dCommand(comand) {
-<span class="cstat-no" title="statement not covered" >        if (!this.commands) {</span>
-<span class="cstat-no" title="statement not covered" >            this.commands = [];</span>
-        }
-        //TODO check if already exists
-<span class="cstat-no" title="statement not covered" >        this.commands.push(command);</span>
-    }
 &nbsp;
 }</pre></td></tr></table></pre>
 
