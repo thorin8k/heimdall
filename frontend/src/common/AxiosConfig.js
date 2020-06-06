@@ -2,12 +2,19 @@ import axios from 'axios';
 
 export default class AxiosConfig {
 
+
+    static getUrl() {
+        let myUrl = new URL(window.location.href);
+        if (process.env.NODE_ENV === 'production') {
+            myUrl = "http://" + myUrl.hostname + ":3676"
+        }
+        return myUrl;
+    }
     /**
      * Se encarga de configurar el interceptor para los errores en las llamadas AJAX realizadas
      */
     static configureAxios(app) {
-        let myUrl = new URL(window.location.href);
-        axios.defaults.baseURL = "http://" + myUrl.hostname + ":3006";
+        axios.defaults.baseURL = this.getUrl();
         // Add a request interceptor
         axios.interceptors.response.use(function (response) {
             switch (response.data.status) {
