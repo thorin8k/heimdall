@@ -10,9 +10,10 @@ import { BaseModel } from '../base';
  */
 export class Project extends BaseModel {
 
-    constructor(id, name) {
+    constructor(id, name, users) {
         super(id);
         this.name = name;
+        this.users = users;
         
     }
 

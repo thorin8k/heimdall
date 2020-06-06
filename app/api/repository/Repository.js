@@ -7,11 +7,13 @@ import { BaseModel } from '../base';
 export class Repository extends BaseModel {
 
 
-    constructor(id, url, credentials) {
+    static get TYPE_GIT() { return 'git' };
+
+    constructor(id, type, url, credentials) {
         super(id);
 
         this.url = url;
-        
+        this.type = type;
         this.credentials = credentials;
     }
 

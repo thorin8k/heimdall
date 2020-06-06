@@ -6,22 +6,18 @@ import { BaseModel } from '../base';
  */
 export class Job extends BaseModel {
 
-    constructor(id, project, name, commands, configs) {
+    
+    static get TYPE_BUILD() { return 'build' };
+    static get TYPE_DEPLOY() { return 'deploy' };
+
+    constructor(id, project, name, commands, agents, configs) {
         super(id);
 
         this.project = project;
         this.name = name;
         this.commands = commands;
+        this.agents = agents;
         this.configs = configs;
-    }
-
-
-    addCommand(comand) {
-        if (!this.commands) {
-            this.commands = [];
-        }
-        //TODO check if already exists
-        this.commands.push(command);
     }
 
 }

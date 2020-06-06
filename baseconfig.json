@@ -1,9 +1,11 @@
 {
     "lang": "es",
     "debug": true,
+    "k1": "change me",
+    "k2": "change me",
     "server": {
       "clustered": false,
-      "port": 3006,
+      "port": 3676,
       "httpsPort": 3663,
       "https": false,
       "sessionDir": "temp/sessions"

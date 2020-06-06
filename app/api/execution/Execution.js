@@ -11,15 +11,14 @@ export class Execution extends BaseModel {
     static get STATUS_SUCCEEDED() { return 'succedeed' };
     static get STATUS_QUEUED() { return 'queued' };
 
-    constructor(id, job, date, tags, artifacts, logs, user, status) {
+    constructor(id, job, date, tags, results, logs, status) {
         super(id);
 
         this.job = job;
         this.date = date;
         this.tags = tags;
-        this.artifacts = artifacts;
+        this.results = results; //Aqui van los tests, los artifacts, etc
         this.logs = logs;
-        this.user = user;
         this.status = status;
     }
 

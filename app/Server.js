@@ -25,6 +25,11 @@ export class Server {
 
         this.app = express();
 
+    }
+
+    
+    initialize() {
+
         this.config();
         this.routes();
         this.errorHandler();
@@ -51,7 +56,7 @@ export class Server {
         //mount session
         this.app.use(session({
             store: new NedbStore({ filename: process.cwd() + '/temp/sessionfile' }),
-            secret: '-',//TODO extract from here
+            secret: global.settings.getConfigValue('k1'),
             // name: 'sessIdentifier',
             cookie: { expires: new Date(253402300000000) },
             resave: true,

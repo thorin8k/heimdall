@@ -28,7 +28,6 @@ export default class UserHandler {
 
 
     static async isAuthenticated() {
-        //TODO get from remote
         if (this.currentUser == null) {
             try {
                 const data = await Axios.get('/session', { withCredentials: true });

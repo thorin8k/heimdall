@@ -1,8 +1,9 @@
+import uuid from 'uuid';
+
 
 /**
  * Crear un dao con esta estructura pero contra MongoDB
  * 
- * TODO test
  */
 export class BaseDao {
 
@@ -21,6 +22,9 @@ export class BaseDao {
         return global.con.collection(this.tableName).find({ id: objectId }).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
     }
     save(object) {
+        if (!object.id) {
+            object.id = uuid.v4();
+        }
         return global.con.collection(this.tableName).insertOne({ ...object });
     }
     update(objectId, newObject) {

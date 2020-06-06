@@ -13,7 +13,7 @@ export class Utils {
     static encrypt(text) {
         const crypto = require('crypto');
         let algorithm = 'aes192',
-            password = '-';//TODO extract from here
+            password = global.settings.getConfigValue('k2');
 
         let cipher = crypto.createCipher(algorithm, password);
         let crypted = cipher.update(text, 'utf8', 'hex');
@@ -24,7 +24,7 @@ export class Utils {
     static decrypt(text) {
         const crypto = require('crypto');
         let algorithm = 'aes192',
-            password = '-';//TODO extract from here
+            password = global.settings.getConfigValue('k2');
 
         let decipher = crypto.createDecipher(algorithm, password);
         let dec = decipher.update(Buffer.from(text, 'base64').toString('ascii'), 'hex', 'utf8');

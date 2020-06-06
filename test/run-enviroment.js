@@ -2,6 +2,8 @@
 before((done) => {
     console.log('Starting test env');
 
-    //TODO ensure database connection
-    require('../loadapp.js')(false).then(done);
+    require('../loadapp.js')(false).then(() => {
+        console.log('started')
+        setTimeout(done, 300);
+    }).catch(done);
 })

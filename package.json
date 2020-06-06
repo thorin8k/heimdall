@@ -25,12 +25,13 @@
     "nedb-session-store": "^1.1.2",
     "path": "^0.12.7",
     "require-dir": "^1.2.0",
+    "socket.io": "^2.3.0",
     "winston": "^3.2.1"
   },
   "scripts": {
     "start": "node execute.js",
     "view": "cd ./frontend/ && npm start",
-    "test": "nyc --reporter=html --reporter=text mocha --exit"
+    "test": "nyc --reporter=html mocha --exit"
   },
   "devDependencies": {
     "chai": "^4.2.0",

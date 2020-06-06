@@ -29,6 +29,7 @@ module.exports = (withLog) => {
             global.con = client.db(dbName);
         } catch (err) {
             console.log(err.stack);
+            return false
         }
 
 

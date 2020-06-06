@@ -47,14 +47,12 @@ export class Settings {
      * Persiste las modificaciones en la configuracion
      */
     static saveConfigModifications(callback) {
-        nconf.use('cfg');
-        //TODO async
-        nconf.save((err) => {
-            if (err) {
-                if (callback) callback(err);
-                console.error(err);
-            }
-            if (callback) callback(null);
+        return new Promise((resolve, reject) => {
+            nconf.use('cfg');
+            nconf.save((err) => {
+                if (err) return reject(err);
+                resolve();
+            });
         });
     }
 }

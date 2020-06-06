@@ -1,4 +1,6 @@
 import http from 'http';
+import socketIO from 'socket.io';
+import { AgentService } from './api/agent';
 /**
  * Inicializa la escucha del server en modo cluster
  */
@@ -71,10 +73,15 @@ export class ClusterServer {
 
         this.server.port = this.port;
         //create http server
-        let server = http.createServer(this.server.app);
+        let server = http.Server(this.server.app);
+
+        global.io = socketIO(server);
+
+        this.server.initialize();
 
         //listen on provided ports
         server.listen(this.server.port);
+
         //add error handler
         server.on("error", (err) => {
             this.handleErrors(err, this.server.port);

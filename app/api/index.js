@@ -6,6 +6,7 @@ import { JobController } from './job';
 import { CommandController } from './command';
 import { ExecutionController } from './execution';
 import { RepositoryController } from './repository/RepositoryController';
+import { AgentController } from './agent';
 
 
 /**
@@ -19,7 +20,8 @@ const routes = [
     JobController,
     CommandController,
     ExecutionController,
-    RepositoryController
+    RepositoryController,
+    AgentController
 ]
 
 
