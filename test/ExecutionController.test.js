@@ -66,7 +66,7 @@ describe('ExecutionController', () => {
 
             const execution = new Execution(uuid, "Test2");
             chai.request(app)
-                .post(`/execution/${uuid}`)
+                .put(`/execution/${uuid}`)
                 .send(execution)
                 .auth('admin', 'admin')
                 .end((err, res) => {

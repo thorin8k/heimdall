@@ -66,7 +66,7 @@ describe('RepositoryController', () => {
 
             const repository = new Repository(uuid, "Test2");
             chai.request(app)
-                .post(`/repository/${uuid}`)
+                .put(`/repository/${uuid}`)
                 .send(repository)
                 .auth('admin', 'admin')
                 .end((err, res) => {

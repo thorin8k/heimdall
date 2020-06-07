@@ -15,7 +15,7 @@ export class BaseController {
         this.router.get(`/${entity}/list`, asyncHandler((res, req, next) => { this.listEntidad(res, req, next); }));
         this.router.get(`/${entity}/:id`, asyncHandler((res, req, next) => { this.getEntidad(res, req, next); }));
         this.router.post(`/${entity}`, asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
-        this.router.post(`/${entity}/:id`, asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
+        this.router.put(`/${entity}/:id`, asyncHandler((res, req, next) => { this.saveEntidad(res, req, next); }));
         this.router.delete(`/${entity}/:id`, asyncHandler((res, req, next) => { this.deleteEntidad(res, req, next); }));
 
         this.service = config.service;

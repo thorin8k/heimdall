@@ -92,7 +92,7 @@ describe('UserController', () => {
 
             const user = new User(uuid, "test2", "test3434");
             chai.request(app)
-                .post(`/user/${uuid}`)
+                .put(`/user/${uuid}`)
                 .send(user)
                 .auth('admin', 'admin')
                 .end((err, res) => {

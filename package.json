@@ -1,8 +1,9 @@
 {
   "name": "heimdall",
   "version": "1.0.0",
-  "description": "Simple CI/CD based on Webhooks and gulp",
-  "license": "GPL",
+  "author": "thorin",
+  "description": "Simple CI/CD based on Webhooks and Websocket Workers",
+  "license": "Apache 2.0",
   "dependencies": {
     "async": "^3.2.0",
     "axios": "^0.19.2",
@@ -16,7 +17,6 @@
     "express-async-handler": "^1.1.4",
     "express-fileupload": "^1.1.6",
     "express-session": "^1.17.1",
-    "handlebars": "^4.7.6",
     "helmet": "^3.22.0",
     "iconv-lite": "^0.5.1",
     "moment": "^2.26.0",

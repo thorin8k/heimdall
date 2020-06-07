@@ -9,6 +9,9 @@ import { BaseModel } from '../base';
  */
 export class Agent extends BaseModel {
 
+    static get STATUS_ONLINE() { return 'online' };
+    static get STATUS_OFFLINE() { return 'offline' };
+
     constructor(id, name, status, is_busy, secret, meta) {
         super(id);
         this.name = name;

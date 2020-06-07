@@ -66,7 +66,7 @@ describe('JobController', () => {
 
             const job = new Job(uuid, "Test2");
             chai.request(app)
-                .post(`/job/${uuid}`)
+                .put(`/job/${uuid}`)
                 .send(job)
                 .auth('admin', 'admin')
                 .end((err, res) => {

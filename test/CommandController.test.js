@@ -66,7 +66,7 @@ describe('CommandController', () => {
 
             const command = new Command(uuid, "Test2");
             chai.request(app)
-                .post(`/command/${uuid}`)
+                .put(`/command/${uuid}`)
                 .send(command)
                 .auth('admin', 'admin')
                 .end((err, res) => {

@@ -66,7 +66,7 @@ describe('ProjectController', () => {
 
             const project = new Project(uuid, "Test2");
             chai.request(app)
-                .post(`/project/${uuid}`)
+                .put(`/project/${uuid}`)
                 .send(project)
                 .auth('admin', 'admin')
                 .end((err, res) => {

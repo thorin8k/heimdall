@@ -66,7 +66,7 @@ describe('AgentController', () => {
 
             const agent = new Agent(uuid, "Test2");
             chai.request(app)
-                .post(`/agent/${uuid}`)
+                .put(`/agent/${uuid}`)
                 .send(agent)
                 .auth('admin', 'admin')
                 .end((err, res) => {

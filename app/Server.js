@@ -27,7 +27,7 @@ export class Server {
 
     }
 
-    
+
     initialize() {
 
         this.config();
@@ -103,8 +103,10 @@ export class Server {
         this.app.use((err, req, res, next) => {
             let jsRes = new JsonResponse();
             jsRes.success = false;
-            jsRes.message = err;
-            // console.log(err);
+            jsRes.message = "Error!";
+            if (this.withLog) {
+                console.error(err);
+            }
             res.status(500).json(jsRes.toJson());
         });
     }
