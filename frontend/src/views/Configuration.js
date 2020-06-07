@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from "react";
 import Axios from 'axios';
 
-export default class Dashboard extends Component {
+export default class Configuration extends Component {
 
     state = {
         elements: []
@@ -11,8 +11,8 @@ export default class Dashboard extends Component {
 
 
     render() {
-        return <div style={{ marginLeft: 30 }}>
-            Test
+        return <div >
+            Config
         </div>;
     }
 }

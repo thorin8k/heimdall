@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.less';
 import { Layout } from 'antd';
 import AppMenu from './components/AppMenu';
-import Dashboard from './components/Dashboard';
 import AxiosConfig from './common/AxiosConfig';
 import UserHandler from './common/UserHandler';
 import AppMain from './layout/AppMain';
 
 
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 
 export default class App extends Component {
@@ -37,8 +36,9 @@ export default class App extends Component {
     async componentDidMount() {
 
         let status = await UserHandler.isAuthenticated()
+        console.log(status);
         this.setState({
-            isAuthenticated: status != null,
+            isAuthenticated: status != null ? status : false,
             loaded: true
         })
     }
@@ -53,6 +53,7 @@ export default class App extends Component {
 
 
     async login(values) {
+        console.log('test')
         await UserHandler.setUser(values);
         this.setState({
             isAuthenticated: true
@@ -99,10 +100,9 @@ export default class App extends Component {
                             menuActive={menuActive} />
                     </Header>
                     <Content>
-                        {isAuthenticated && <Dashboard menuActive={menuActive} />}
+                        {isAuthenticated && <AppMain />}
                     </Content>
-
-
+                    <Footer style={{ textAlign: 'center' }}>Heimdall by Thorin (@<a href="https://github.com/thorin8k/heimdall" _target='blank'>GitHub</a>)</Footer>
                 </Layout>}
         </div>
     }

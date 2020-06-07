@@ -3,8 +3,9 @@ import { Layout } from 'antd';
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 
-import Dashboard from '../components/Dashboard';
-import Configuration from '../components/Configuration';
+import Home from '../views/Home';
+import Projects from '../views/Projects';
+import Configuration from '../views/Configuration';
 
 const { Content } = Layout;
 
@@ -46,10 +47,12 @@ class AppMain extends Component {
         };
 
         return (
-            <Content >
+            <Content style={{ padding: '10px 40px' }}>
                 <Switch>
 
-                    <Route exact path='/' render={({ match }) => <Dashboard match={match} menuActive='home' {...defaultProps} />} />
+                    <Route exact path='/' render={({ match }) => <Projects match={match} menuActive='home' {...defaultProps} />} />
+                    {/* <Route exact path='/projects' render={({ match }) => <Projects match={match} menuActive='projects' {...defaultProps} />} /> */}
+                    <Route exact path='/config' render={({ match }) => <Configuration match={match} menuActive='config' {...defaultProps} />} />
                 </Switch>
             </Content >
         );

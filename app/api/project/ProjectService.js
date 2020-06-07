@@ -1,5 +1,5 @@
 import { BaseService } from '../base';
-import { Project } from './';
+import { Project, ProjectDao } from './';
 
 export class ProjectService extends BaseService {
     /**
@@ -7,9 +7,8 @@ export class ProjectService extends BaseService {
      */
     constructor() {
         super('project', Project);
+        this.mainDao = new ProjectDao('project', Project);
     }
-
-
 
 }
 

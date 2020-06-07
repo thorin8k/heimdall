@@ -6,10 +6,14 @@ import * as serviceWorker from './serviceWorker';
 
 import { HashRouter } from 'react-router-dom';
 
+import { ConfigProvider } from 'antd';
+import es_ES from 'antd/es/locale/es_ES';
 
 ReactDOM.render(
     <HashRouter>
-        <App />
+        <ConfigProvider locale={es_ES}>
+            <App />
+        </ConfigProvider>
     </HashRouter>,
     document.getElementById('root')
 );

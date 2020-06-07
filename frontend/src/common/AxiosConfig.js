@@ -4,9 +4,10 @@ export default class AxiosConfig {
 
 
     static getUrl() {
-        let myUrl = new URL(window.location.href);
-        if (process.env.NODE_ENV === 'production') {
-            myUrl = "http://" + myUrl.hostname + ":3676"
+        const currentUrl = new URL(window.location.href);
+        let myUrl = currentUrl.protocol + "//" + currentUrl.hostname + ":" + currentUrl.port;
+        if (process.env.NODE_ENV !== 'production') {
+            myUrl = "http://" + currentUrl.hostname + ":3676"
         }
         return myUrl;
     }
@@ -14,7 +15,8 @@ export default class AxiosConfig {
      * Se encarga de configurar el interceptor para los errores en las llamadas AJAX realizadas
      */
     static configureAxios(app) {
-        axios.defaults.baseURL = this.getUrl();
+        axios.defaults.baseURL = AxiosConfig.getUrl();
+        axios.defaults.withCredentials = true
         // Add a request interceptor
         axios.interceptors.response.use(function (response) {
             switch (response.data.status) {
@@ -43,7 +45,7 @@ export default class AxiosConfig {
             // Do something before request is sent
             return response;
         }, function (error) {
-            switch (error.response.data.status) {
+            switch (error.response && error.response.data.status) {
                 case 403:
                     if (app) {
                         app.unauthorized();
