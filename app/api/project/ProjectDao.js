@@ -14,28 +14,90 @@ export class ProjectDao extends BaseDao {
     }
 
     loadAllData() {
-        const aggregation = {
-            '$lookup': {
-                from: 'job',
-                localField: 'id',
-                foreignField: 'project',
-                as: 'jobs'
-            }
-        };
 
-        return global.con.collection(this.tableName).aggregate([aggregation]).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
+        const aggregation = [
+            {
+                "$lookup": { //Join con Jobs
+                    "from": "job",
+                    "let": { "projectId": "$id" },
+                    "pipeline": [
+                        { "$match": { "$expr": { "$eq": ["$project", "$$projectId"] } } },
+                        {
+                            "$lookup": { //Join con executions
+                                "from": "execution",
+                                "let": { "jobId": "$id" },
+                                "pipeline": [
+                                    { "$match": { "$expr": { "$eq": ["$job", "$$jobId"] } } }
+                                ],
+                                "as": "executions"
+                            }
+                        }
+                    ],
+                    "as": "jobs"
+                }
+            }
+        ]
+
+        return global.con.collection(this.tableName).aggregate(aggregation).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
     }
     loadFilteredData(filters, start, limit) {
 
-        const aggregation = {
-            '$lookup': {
-                from: 'job',
-                localField: 'id',
-                foreignField: 'project',
-                as: 'jobs'
-            }
-        };
 
-        return global.con.collection(this.tableName).aggregate([{ '$match': { ...filters } }, aggregation]).skip(start).limit(limit).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
+        const aggregation = [
+            { '$match': { ...filters } },
+            {
+                "$lookup": { //Join con Jobs
+                    "from": "job",
+                    "let": { "projectId": "$id" },
+                    "pipeline": [
+                        { "$match": { "$expr": { "$eq": ["$project", "$$projectId"] } } },
+                        {
+                            "$lookup": { //Join con executions
+                                "from": "execution",
+                                "let": { "jobId": "$id" },
+                                "pipeline": [
+                                    { "$match": { "$expr": { "$eq": ["$job", "$$jobId"] } } }
+                                ],
+                                "as": "executions"
+                            }
+                        }
+                    ],
+                    "as": "jobs"
+                }
+            }
+        ]
+
+        return global.con.collection(this.tableName).aggregate(aggregation).skip(start).limit(limit).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
     }
+
+    loadById(objectId) {
+
+        const aggregation = [
+            { '$match': { id: objectId } },
+            {
+                "$lookup": { //Join con Jobs
+                    "from": "job",
+                    "let": { "projectId": "$id" },
+                    "pipeline": [
+                        { "$match": { "$expr": { "$eq": ["$project", "$$projectId"] } } },
+                        {
+                            "$lookup": { //Join con executions
+                                "from": "execution",
+                                "let": { "jobId": "$id" },
+                                "pipeline": [
+                                    { "$match": { "$expr": { "$eq": ["$job", "$$jobId"] } } }
+                                ],
+                                "as": "executions"
+                            }
+                        }
+                    ],
+                    "as": "jobs"
+                }
+            }
+        ]
+
+
+        return global.con.collection(this.tableName).aggregate(aggregation).map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
+    }
+
 }

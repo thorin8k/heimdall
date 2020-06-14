@@ -2,11 +2,12 @@ import React from 'react';
 import { Component } from "react";
 import Axios from 'axios';
 
-import { List, Avatar, Space, Skeleton } from 'antd';
+import { List, Avatar, Space, Skeleton, Typography, Divider } from 'antd';
 import { CheckCircleOutlined, FireOutlined, InboxOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
-const IconText = ({ icon, text }) => (
-    <Space>
+const IconText = ({ style, icon, text }) => (
+    <Space style={style}>
         {icon}
         {text}
     </Space>
@@ -21,7 +22,6 @@ export default class Projects extends Component {
     loadProjects = async () => {
         try {
             const response = await Axios.get('/project/list')
-            console.log(response);
             this.setState({
                 elements: response.data.data
             })
@@ -36,12 +36,35 @@ export default class Projects extends Component {
 
     }
 
+    drawProjectJobs(jobs) {
+        return (<div>
+            <Typography.Text strong>Jobs</Typography.Text>
+            <List
+                itemLayout="vertical"
+                size="small"
+                style={{ width: '55vw' }}
+                dataSource={jobs}
+                renderItem={item => {
+                    let icon = item.icon;
+
+                    return (<List.Item
+                        key={item.id}
+                    >
+                        <div className='jobList'>
+                            <span style={{ minWidth: 200 }}><Link to={'/project/' + item.project + '/job/' + item.id}>{item.name}</Link></span>
+                            <Link to={'/project/' + item.project + '/job/' + item.id + '/?latestExecution'}><IconText icon={<CheckCircleOutlined style={{ color: 'green' }} />} text="#156" key="list-vertical-star-o" /></Link>
+                        </div>
+                    </List.Item>)
+                }}
+            />
+        </div>)
+    }
 
     render() {
 
         const { elements } = this.state;
 
-        return <div >
+        return <div className='projectList'>
 
             <List
                 itemLayout="vertical"
@@ -60,16 +83,14 @@ export default class Projects extends Component {
                             <IconText icon={<FireOutlined style={{ color: 'red' }} />} text="2" key="list-vertical-like-o" />,
                             <IconText icon={<InboxOutlined />} text="2" key="list-vertical-message" />,
                         ]}
-                        extra={
-                            <Skeleton />
-                        }
+                        extra={this.drawProjectJobs(item.jobs)}
                     >
                         <List.Item.Meta
                             avatar={<Avatar src={icon} />}
-                            title={<a href={item.href}>{item.name}</a>}
+                            title={<Link to={'/project/' + item.id}>{item.name}</Link>}
                             description={item.description}
                         />
-                        {item.content}
+
                     </List.Item>)
                 }}
             />

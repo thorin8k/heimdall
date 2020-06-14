@@ -25,6 +25,34 @@ describe('ProjectController', () => {
                 });
         });
     });
+    describe('#findJobs()', () => {
+        it('should return all project jobs', (done) => {
+            const app = global.cluster_server.server.app;
+            chai.request(app)
+                .get(`/project/${uuid}/jobs`)
+                .auth('admin', 'admin')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.success.should.be.true;
+                    done();
+                });
+        });
+    });
+    describe('#summary()', () => {
+        it('should return all info on projects', (done) => {
+            const app = global.cluster_server.server.app;
+            chai.request(app)
+                .get('/project/summary')
+                .auth('admin', 'admin')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.success.should.be.true;
+                    done();
+                });
+        });
+    });
 
     describe('#insertOne()', () => {
         it('should insert the project and return success', (done) => {

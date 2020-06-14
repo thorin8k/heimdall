@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import Home from '../views/Home';
 import Projects from '../views/Projects';
 import Configuration from '../views/Configuration';
+import Project from '../views/Project';
 
 const { Content } = Layout;
 
@@ -53,6 +54,8 @@ class AppMain extends Component {
                     <Route exact path='/' render={({ match }) => <Projects match={match} menuActive='home' {...defaultProps} />} />
                     {/* <Route exact path='/projects' render={({ match }) => <Projects match={match} menuActive='projects' {...defaultProps} />} /> */}
                     <Route exact path='/config' render={({ match }) => <Configuration match={match} menuActive='config' {...defaultProps} />} />
+                    <Route exact path='/project/:id' render={({ match }) => <Project match={match} menuActive='config' {...defaultProps} />} />
+                    <Route exact path='/project/:id/job/:jobId' render={({ match }) => <Project match={match} menuActive='config' {...defaultProps} />} />
                 </Switch>
             </Content >
         );

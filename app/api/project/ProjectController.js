@@ -14,9 +14,11 @@ export class ProjectController extends BaseController {
     }
 
     configure() {
+        
+        this.router.get(`/project/:id/jobs`, asyncHandler((res, req, next) => { this.getProjectJobs(res, req, next); }));
+
         super.configure('project', { service: ProjectService, model: Project, table: 'Project' });
 
-        this.router.get(`/project/:id/jobs`, asyncHandler((res, req, next) => { this.getProjectJobs(res, req, next); }));
         return this.router;
     }
 
@@ -36,8 +38,9 @@ export class ProjectController extends BaseController {
     async getProjectJobs(request, response, next) {
         let service = new JobService();
         let data = await service.list({ project: request.params.id });
-        let jsRes = new JsonResponse(true, data);
 
+        let jsRes = new JsonResponse(true, data);
         response.json(jsRes.toJson());
     }
+
 }

@@ -8,7 +8,7 @@ export class Execution extends BaseModel {
     static get STATUS_FAIL() { return 'failed' };
     static get STATUS_STOPPED() { return 'stopped' };
     static get STATUS_RUNNING() { return 'running' };
-    static get STATUS_SUCCEEDED() { return 'succedeed' };
+    static get STATUS_SUCCESS() { return 'success' };
     static get STATUS_QUEUED() { return 'queued' };
 
     constructor(id, job, date, tags, results, logs, status) {

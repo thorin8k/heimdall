@@ -11,7 +11,7 @@ export class BaseDao {
         this.tableName = tableName;
         this.model = model;
     }
-
+    //TODO sort!!!
     loadAllData() {
         return global.con.collection(this.tableName).find().map((e) => this.model && this.model.fromObject ? this.model.fromObject(e) : e).toArray();
     }
