@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import '@ant-design/compatible/assets/index.css';
 import { Form, Input, Button } from 'antd';
@@ -7,10 +7,9 @@ function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class Login extends React.Component {
+export default class Login extends React.Component {
 
     onFinish = values => {
-        console.log('Finish:', values);
         this.props.onSubmit(values);
     };
 
@@ -42,7 +41,7 @@ class Login extends React.Component {
                             htmlType="submit"
 
                         >
-                            Entrar
+                            Enter
                          </Button>
                     )}
                 </Form.Item>
@@ -51,5 +50,3 @@ class Login extends React.Component {
     }
 }
 
-
-export default Login;

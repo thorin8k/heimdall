@@ -76,6 +76,12 @@ export class JobController extends BaseController {
         for (let agentIdx of job.agents) {
             if (global.sockets[agentIdx] && global.sockets[agentIdx].agent.status !== Agent.STATUS_OFFLINE && !global.sockets[agentIdx].agent.is_busy) {
                 global.sockets[agentIdx].socket.emit('run_job', job);
+
+                //Start listening on job messages
+                global.sockets[agentIdx].socket.on('job_' + job.id, (message) => {
+                    console.log(message)
+                    //TODO stop on certain command
+                });
                 running = true;
                 break;
             }
