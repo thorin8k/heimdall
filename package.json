@@ -15,7 +15,7 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
-    "express-fileupload": "^1.1.6",
+    "express-fileupload": "^1.1.9",
     "express-session": "^1.17.1",
     "helmet": "^3.22.0",
     "iconv-lite": "^0.5.1",
