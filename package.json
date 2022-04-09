@@ -19,7 +19,7 @@
     "express-session": "^1.17.1",
     "helmet": "^3.22.0",
     "iconv-lite": "^0.5.1",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "mongodb": "^3.5.8",
     "nconf": "^0.10.0",
     "nedb-session-store": "^1.1.2",
