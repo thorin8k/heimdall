@@ -21,7 +21,7 @@
     "iconv-lite": "^0.5.1",
     "moment": "^2.26.0",
     "mongodb": "^3.5.8",
-    "nconf": "^0.10.0",
+    "nconf": "^0.11.4",
     "nedb-session-store": "^1.1.2",
     "path": "^0.12.7",
     "require-dir": "^1.2.0",
